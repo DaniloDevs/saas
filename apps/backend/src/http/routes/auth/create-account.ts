@@ -3,6 +3,7 @@ import type { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { z } from "zod";
 import { prisma } from "@/lib/prisma"
 import { hash } from 'bcryptjs';
+import { BadRequest } from '../_errors/bad-request';
 
 export default async function CreateAccount(app: FastifyInstance) {
      app
@@ -11,13 +12,14 @@ export default async function CreateAccount(app: FastifyInstance) {
                '/users',
                {
                     schema: {
+                         tags: ["Auth"],
+                         summary: "Create a new account",
                          body: z.object({
                               name: z.string(),
                               email: z.string().email(),
                               password: z.string().min(6),
                          })
                     }
-
                },
                async (request, reply) => {
                     const { email, name, password } = request.body
@@ -26,7 +28,18 @@ export default async function CreateAccount(app: FastifyInstance) {
                          where: { email }
                     })
 
-                    if (userWithSameEmail) return reply.status(400).send({ message: "User with save e-mail already exist." })
+                    if (userWithSameEmail) {
+                         throw new BadRequest("User with save e-mail already exist.")
+                    }
+
+
+                    const [_, domain] = email.split('@')
+                    const autoJoinOrganization = await prisma.organization.findFirst({
+                         where: {
+                              domain,
+                              shouldAttachUsersByDomain: true
+                         }
+                    })
 
                     const passwordHash = await hash(password, 6)
 
@@ -34,7 +47,12 @@ export default async function CreateAccount(app: FastifyInstance) {
                          data: {
                               name,
                               email,
-                              passwordHash
+                              passwordHash,
+                              members_on: autoJoinOrganization ? {
+                                   create: {
+                                        organizationId: autoJoinOrganization.id
+                                   }
+                              } : undefined
                          }
                     })
                }
