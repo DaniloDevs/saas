@@ -17,9 +17,9 @@ export default async function AuthenticateWithGithub(app: FastifyInstance) {
                               code: z.string()
                          }),
                          response: {
-                              // 201: z.object({
-                              //      token: z.string()
-                              // }),
+                              201: z.object({
+                                   token: z.string()
+                              }),
                          }
                     }
                },
