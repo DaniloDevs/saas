@@ -5,6 +5,7 @@ import GetProfile from "./auth/get-profile";
 import RequestPasswordRecover from "./auth/request-password-recover";
 import ResetPassword from "./auth/reset-password";
 import AuthenticateWithGithub from "./auth/authenticate-with-github";
+import AuthenticateWithGoogle from "./auth/authenticate-with-google";
 
 
 export default async function SetupRoutes(server: FastifyInstance) {
@@ -16,4 +17,5 @@ export default async function SetupRoutes(server: FastifyInstance) {
      server.register(RequestPasswordRecover)
      server.register(ResetPassword)
      server.register(AuthenticateWithGithub)
+     server.register(AuthenticateWithGoogle)
 }
