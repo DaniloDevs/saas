@@ -38,7 +38,7 @@ export default async function ResetPassword(app: FastifyInstance) {
 
                     await prisma.user.update({
                          where: { id: tokenFromCode.id },
-                         data:{
+                         data: {
                               passwordHash
                          }
                     })
