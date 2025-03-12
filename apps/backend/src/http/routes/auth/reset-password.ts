@@ -9,7 +9,7 @@ export default async function ResetPassword(app: FastifyInstance) {
      app
           .withTypeProvider<ZodTypeProvider>()
           .post(
-               '/password/recover',
+               '/password/reset',
                {
                     schema: {
                          tags: ["Auth"],

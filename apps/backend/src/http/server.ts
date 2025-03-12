@@ -6,6 +6,7 @@ import fastifySwagger from '@fastify/swagger'
 import fastiftyJWT from '@fastify/jwt'
 import fastifySwaggerUI from '@fastify/swagger-ui'
 import { errorHandler } from "./error-handler"
+import { env } from "@saas/env"
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -23,7 +24,15 @@ app.register(fastifySwagger, {
                description: 'Full-Stack SaaS app with multi-tenant & RBAC',
                version: '1.0.0',
           },
-          servers: [],
+          components: {
+               securitySchemes: {
+                    bearerAuth: {
+                         type: 'http',
+                         scheme: 'bearer',
+                         bearerFormat: 'JWT',
+                    },
+               },
+          },
      },
      transform: jsonSchemaTransform,
 })
@@ -33,7 +42,7 @@ app.register(fastifySwaggerUI, {
 })
 
 app.register(fastiftyJWT, {
-     secret: "BAguLHosREto"
+     secret: env.JWT_SECRET
 })
 
 app.register(SetupRoutes)
