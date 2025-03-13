@@ -8,6 +8,8 @@ import AuthenticateWithGithub from "./auth/authenticate-with-github";
 import AuthenticateWithGoogle from "./auth/authenticate-with-google";
 import CreateOrganization from "./orgs/create-organization";
 import GetUserMembership from "./orgs/get-membership";
+import GetOrganization from "./orgs/get-organization";
+import GetOrganizations from "./orgs/get-organizations";
 
 
 export default async function SetupRoutes(server: FastifyInstance) {
@@ -24,4 +26,6 @@ export default async function SetupRoutes(server: FastifyInstance) {
      // ORGANIZATION
      server.register(CreateOrganization)
      server.register(GetUserMembership)
+     server.register(GetOrganization)
+     server.register(GetOrganizations)
 }
