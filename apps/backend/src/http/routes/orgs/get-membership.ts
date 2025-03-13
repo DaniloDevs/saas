@@ -1,0 +1,46 @@
+import { auth } from '@/http/middlewares/auth';
+import { Role } from '@prisma/client';
+import type { FastifyInstance } from 'fastify';
+import type { ZodTypeProvider } from 'fastify-type-provider-zod';
+import { z } from "zod";
+import { roleSchema } from '@saas/auth/src';
+
+export default async function GetUserMembership(app: FastifyInstance) {
+     app
+          .withTypeProvider<ZodTypeProvider>()
+          .register(auth)
+          .post(
+               '/organization/:slug/membership',
+               {
+                    schema: {
+                         tags: ["Organization"],
+                         summary: "Get user membership on organization",
+                         security: [{ bearerAuth: [] }],
+                         params: z.object({
+                              slug: z.string(),
+                         }),
+                         response: {
+                              201: z.object({
+                                   membership: z.object({
+                                        id: z.string(),
+                                        role: roleSchema,
+                                        organizationId: z.string()
+                                   })
+                              })
+                         }
+                    }
+               },
+               async (request, reply) => {
+                    const { slug } = request.params
+                    const { membership } = await request.getUserMembership(slug)
+
+                    return reply.status(200).send({
+                         membership: {
+                              id: membership.id,
+                              role: roleSchema.parse(membership.role),
+                              organizationId: membership.organizationId
+                         }
+                    })
+               }
+          )
+}

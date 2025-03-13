@@ -7,6 +7,7 @@ import ResetPassword from "./auth/reset-password";
 import AuthenticateWithGithub from "./auth/authenticate-with-github";
 import AuthenticateWithGoogle from "./auth/authenticate-with-google";
 import CreateOrganization from "./orgs/create-organization";
+import GetUserMembership from "./orgs/get-membership";
 
 
 export default async function SetupRoutes(server: FastifyInstance) {
@@ -22,4 +23,5 @@ export default async function SetupRoutes(server: FastifyInstance) {
 
      // ORGANIZATION
      server.register(CreateOrganization)
+     server.register(GetUserMembership)
 }
