@@ -10,6 +10,7 @@ import CreateOrganization from "./orgs/create-organization";
 import GetUserMembership from "./orgs/get-membership";
 import GetOrganization from "./orgs/get-organization";
 import GetOrganizations from "./orgs/get-organizations";
+import ShutdownOrganzation from "./orgs/shutdown-organizatin";
 
 
 export default async function SetupRoutes(server: FastifyInstance) {
@@ -28,4 +29,5 @@ export default async function SetupRoutes(server: FastifyInstance) {
      server.register(GetUserMembership)
      server.register(GetOrganization)
      server.register(GetOrganizations)
+     server.register(ShutdownOrganzation)
 }

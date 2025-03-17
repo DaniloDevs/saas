@@ -4,8 +4,7 @@ import type { FastifyInstance } from 'fastify';
 import type { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { z } from "zod";
 import { BadRequest } from '../_errors/bad-request';
-import { createSlug } from '@/utils/create-slug';
-import { defineAbilityFor, organizationSchema, userSchema } from '@saas/auth';
+import { organizationSchema } from '@saas/auth';
 import { UnauthorizationError } from '../_errors/unauthorized';
 import { getUserPermission } from '@/utils/get-user-permissions';
 
@@ -13,7 +12,7 @@ export default async function UpdateOrganization(app: FastifyInstance) {
      app
           .withTypeProvider<ZodTypeProvider>()
           .register(auth)
-          .post(
+          .put(
                '/organizations/:slug',
                {
                     schema: {
