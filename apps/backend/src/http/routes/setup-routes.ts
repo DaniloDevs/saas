@@ -12,6 +12,7 @@ import GetOrganization from "./orgs/get-organization";
 import GetOrganizations from "./orgs/get-organizations";
 import ShutdownOrganzation from "./orgs/shutdown-organizatin";
 import TransferOrganization from "./orgs/transfer-organization";
+import CreateProjects from "./projects/create-projects";
 
 
 export default async function SetupRoutes(server: FastifyInstance) {
@@ -32,4 +33,7 @@ export default async function SetupRoutes(server: FastifyInstance) {
      server.register(GetOrganizations)
      server.register(ShutdownOrganzation)
      server.register(TransferOrganization)
+
+     // PROJECTS
+     server.register(CreateProjects)
 }
