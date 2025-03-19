@@ -17,6 +17,7 @@ import DeleteProjects from "./projects/delete-projects";
 import GetProject from "./projects/view-project";
 import GetProjects from "./projects/view-projects";
 import UpdateProjects from "./projects/update-projects";
+import GetMembers from "./members/get-members";
 
 
 export default async function SetupRoutes(server: FastifyInstance) {
@@ -44,4 +45,7 @@ export default async function SetupRoutes(server: FastifyInstance) {
      server.register(GetProject)
      server.register(GetProjects)
      server.register(UpdateProjects)
+
+     // MEMBERS
+     server.register(GetMembers)
 }

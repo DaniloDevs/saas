@@ -12,7 +12,7 @@ export default async function UpdateProjects(app: FastifyInstance) {
      app
           .withTypeProvider<ZodTypeProvider>()
           .register(auth)
-          .post(
+          .put(
                '/organization/:slug/projects/:projectId',
                {
                     schema: {
