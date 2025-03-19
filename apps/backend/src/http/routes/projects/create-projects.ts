@@ -46,7 +46,7 @@ export default async function CreateProjects(app: FastifyInstance) {
                     const { cannot } = getUserPermission(userId, membership.role)
 
                     if (cannot('create', 'Project')) {
-                         throw new UnauthorizationError("You're");
+                         throw new UnauthorizationError("You're not allowed to create new projects");
 
                     }
 
