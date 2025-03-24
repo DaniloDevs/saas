@@ -6,47 +6,53 @@ import Link from "next/link";
 import gitHubIcon from "@/assets/github-logo.svg"
 import googleIcon from "@/assets/google-logo.svg"
 import Image from "next/image";
-import { signInWithEmailAndPassword } from "./actions";
 
-export default function SignInPage() {
+export default function SignUpPage() {
      return (
-          <form action={signInWithEmailAndPassword} className="space-y-6 flex flex-col items-center" >
+          <form action="" className="space-y-6 flex flex-col items-center" >
+               <div className="space-y-1 w-full">
+                    <Label htmlFor="name">Name</Label>
+                    <Input name='name' id="name" />
+               </div>
+
                <div className="space-y-1 w-full">
                     <Label htmlFor="email">E-mail</Label>
                     <Input name='email' type="email" id="email" />
                </div>
 
-               <div className="space-y-1 w-full">
-                    <Label htmlFor="password">Password</Label>
-                    <Input name='password' type="password" id="password" />
+               <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-1 w-full">
+                         <Label htmlFor="password">Password</Label>
+                         <Input name='password' type="password" id="password" />
+                    </div>
 
-                    <Link href="/auth/forgot-password" className="text-xs font-medium text-foreground hover:underline">
-                         Forgot your Password
-                    </Link>
+                    <div className="space-y-1 w-full">
+                         <Label htmlFor="password_confirmation">Check password</Label>
+                         <Input name='password_confirmation' type="password" id="password_confirmation" />
+                    </div>
                </div>
 
                <Button type="submit" variant="outline" className="w-full">
-                    Sign in With e-mail
+                    Create Account
                </Button>
 
                <Button variant="link" className="w-full" size="sm" asChild>
-                    <Link href="/auth/sign-up">
-                         Create new Account
+                    <Link href="/auth/sign-in">
+                         Already registered? Sign in
                     </Link>
                </Button>
-
 
                <Separator />
 
                <div className="grid grid-cols-2 gap-2 ">
                     <Button type="submit" variant="secondary" className="w-full">
                          <Image src={googleIcon} className="size-5 mr-2" alt="GitHub Icon" />
-                         Google Sign-in
+                         Google Sign-up
                     </Button>
 
                     <Button type="submit" variant="secondary" className="w-full">
                          <Image src={gitHubIcon} className="size-5 mr-2 dark:invert" alt="GitHub Icon" />
-                         GitHub Sign-in
+                         GitHub Sign-up
                     </Button>
                </div>
           </form>
