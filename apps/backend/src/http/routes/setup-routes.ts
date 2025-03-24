@@ -24,6 +24,8 @@ import CreateInvite from "./invites/create-invite";
 import GetInvite from "./invites/get-invite";
 import AcceptInvite from "./invites/accept-invites";
 import RejectInvite from "./invites/reject-invite";
+import RevokeInvite from "./invites/revoke-invite";
+import GetInvites from "./invites/get-invites";
 
 
 export default async function SetupRoutes(server: FastifyInstance) {
@@ -60,6 +62,8 @@ export default async function SetupRoutes(server: FastifyInstance) {
      // INVITES
      server.register(CreateInvite)
      server.register(GetInvite)
+     server.register(GetInvites)
      server.register(AcceptInvite)
      server.register(RejectInvite)
+     server.register(RevokeInvite)
 }
