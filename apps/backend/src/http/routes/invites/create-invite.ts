@@ -88,7 +88,7 @@ export default async function CreateInvite(app: FastifyInstance) {
                               email,
                               role,
                               organizationId: organazition.id,
-                              userId // AuthorId
+                              authorId: userId 
                          }
                     })
 

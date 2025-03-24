@@ -21,6 +21,7 @@ import GetMembers from "./members/get-members";
 import UpdateMember from "./members/update-members";
 import RemoveMember from "./members/remove-member";
 import CreateInvite from "./invites/create-invite";
+import GetInvite from "./invites/get-invite";
 
 
 export default async function SetupRoutes(server: FastifyInstance) {
@@ -56,4 +57,5 @@ export default async function SetupRoutes(server: FastifyInstance) {
 
      // INVITES
      server.register(CreateInvite)
+     server.register(GetInvite)
 }

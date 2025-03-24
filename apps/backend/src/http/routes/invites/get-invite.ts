@@ -1,0 +1,68 @@
+import { auth } from '@/http/middlewares/auth';
+import { prisma } from '@/lib/prisma';
+import type { FastifyInstance } from 'fastify';
+import type { ZodTypeProvider } from 'fastify-type-provider-zod';
+import { z } from "zod";
+import { BadRequest } from '../_errors/bad-request';
+import { getUserPermission } from '@/utils/get-user-permissions';
+import { UnauthorizationError } from '../_errors/unauthorized';
+import { roleSchema } from '@saas/auth';
+
+export default async function GetInvite(app: FastifyInstance) {
+     app
+          .withTypeProvider<ZodTypeProvider>()
+          .get(
+               '/invites/:id',
+               {
+                    schema: {
+                         tags: ["Invites"],
+                         summary: "Get a invite",
+                         params: z.object({
+                              id: z.string()
+                         }),
+                         response: {
+                              200: z.object({
+                                   invite: z.object({
+                                        id: z.string(),
+                                        email: z.string(),
+                                        role: roleSchema,
+                                        createdAt: z.date(),
+                                        author: z.object({
+                                             id: z.string(),
+                                             name: z.string().nullable(),
+                                             avatarUrl: z.string().nullable(),
+                                        }).nullable()
+                                   })
+                              })
+                         }
+                    }
+               },
+               async (request, reply) => {
+                    const { id } = request.params
+
+                    const invite = await prisma.invite.findUnique({
+                         where: { id },
+                         select: {
+                              id: true,
+                              email: true,
+                              role: true,
+                              createdAt: true,
+                              author: {
+                                   select: {
+                                        id: true,
+                                        name: true,
+                                        avatarUrl: true
+                                   }
+                              }
+                         }
+                    })
+
+
+                    if (!invite) {
+                         throw new BadRequest("Invite not found!")
+                    }
+
+                    return reply.status(204).send({ invite })
+               }
+          )
+}
