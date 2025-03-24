@@ -22,6 +22,8 @@ import UpdateMember from "./members/update-members";
 import RemoveMember from "./members/remove-member";
 import CreateInvite from "./invites/create-invite";
 import GetInvite from "./invites/get-invite";
+import AcceptInvite from "./invites/accept-invites";
+import RejectInvite from "./invites/reject-invite";
 
 
 export default async function SetupRoutes(server: FastifyInstance) {
@@ -58,4 +60,6 @@ export default async function SetupRoutes(server: FastifyInstance) {
      // INVITES
      server.register(CreateInvite)
      server.register(GetInvite)
+     server.register(AcceptInvite)
+     server.register(RejectInvite)
 }
