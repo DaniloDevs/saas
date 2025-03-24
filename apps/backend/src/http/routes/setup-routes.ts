@@ -27,6 +27,7 @@ import RejectInvite from "./invites/reject-invite";
 import RevokeInvite from "./invites/revoke-invite";
 import GetInvites from "./invites/get-invites";
 import GetPedingInvites from "./invites/get-peding-invites";
+import GetOrganizationBilling from "./billing/get-organization-billing";
 
 
 export default async function SetupRoutes(server: FastifyInstance) {
@@ -68,4 +69,7 @@ export default async function SetupRoutes(server: FastifyInstance) {
      server.register(RejectInvite)
      server.register(RevokeInvite)
      server.register(GetPedingInvites)
+     
+     // BILLING
+     server.register(GetOrganizationBilling)
 }
