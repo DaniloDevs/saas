@@ -26,6 +26,7 @@ import AcceptInvite from "./invites/accept-invites";
 import RejectInvite from "./invites/reject-invite";
 import RevokeInvite from "./invites/revoke-invite";
 import GetInvites from "./invites/get-invites";
+import GetPedingInvites from "./invites/get-peding-invites";
 
 
 export default async function SetupRoutes(server: FastifyInstance) {
@@ -66,4 +67,5 @@ export default async function SetupRoutes(server: FastifyInstance) {
      server.register(AcceptInvite)
      server.register(RejectInvite)
      server.register(RevokeInvite)
+     server.register(GetPedingInvites)
 }
