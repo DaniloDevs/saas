@@ -6,7 +6,6 @@ import { z } from "zod";
 import { BadRequest } from '../_errors/bad-request';
 import { getUserPermission } from '@/utils/get-user-permissions';
 import { UnauthorizationError } from '../_errors/unauthorized';
-import { roleSchema } from '@saas/auth';
 
 export default async function RemoveMember(app: FastifyInstance) {
      app

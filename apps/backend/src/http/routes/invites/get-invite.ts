@@ -1,11 +1,8 @@
-import { auth } from '@/http/middlewares/auth';
 import { prisma } from '@/lib/prisma';
 import type { FastifyInstance } from 'fastify';
 import type { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { z } from "zod";
 import { BadRequest } from '../_errors/bad-request';
-import { getUserPermission } from '@/utils/get-user-permissions';
-import { UnauthorizationError } from '../_errors/unauthorized';
 import { roleSchema } from '@saas/auth';
 
 export default async function GetInvite(app: FastifyInstance) {

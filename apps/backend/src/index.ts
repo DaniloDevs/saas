@@ -2,7 +2,6 @@ import { env } from "@saas/env"
 import { app } from "./http/server"
 
 
-
 app.listen({
      port: env.SERVER_PORT,
 }).then(() => {

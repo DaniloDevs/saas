@@ -12,7 +12,7 @@ export default async function CreateInvite(app: FastifyInstance) {
      app
           .withTypeProvider<ZodTypeProvider>()
           .register(auth)
-          .get(
+          .post(
                '/organization/:slug/invites',
                {
                     schema: {

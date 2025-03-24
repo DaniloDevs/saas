@@ -1,8 +1,8 @@
 import type { FastifyInstance } from 'fastify';
 import type { ZodTypeProvider } from 'fastify-type-provider-zod';
 import { z } from "zod";
-import { prisma } from "@/lib/prisma"
-import { compare, hash } from 'bcryptjs';
+import { prisma } from "@/lib/prisma";
+import { compare } from 'bcryptjs';
 import { BadRequest } from '../_errors/bad-request';
 
 export default async function AuthtenticateWithPassaword(app: FastifyInstance) {
