@@ -2,32 +2,51 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useActionState } from "react";
+import { useState, useTransition, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 
-import googleIcon from "@/assets/google-logo.svg"
-import gitHubIcon from "@/assets/github-logo.svg"
+import googleIcon from "@/assets/google-logo.svg";
+import gitHubIcon from "@/assets/github-logo.svg";
 
 import { signInWithEmailAndPassword } from "./actions";
 import { AlertOctagon, Loader2 } from "lucide-react";
-import { toast } from "sonner"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export function SignInForm() {
-     const [{ sucess, message, errors }, formAction, isPeding] = useActionState(
-          signInWithEmailAndPassword,
-          { sucess: false, message: null, errors: null }
-     )
+
+     const [isPeding, startTransition] = useTransition()
+
+     const [{ sucess, message, errors }, setFormState] = useState<{
+          sucess: Boolean,
+          message: string | null,
+          errors: Record<string, string[]> | null
+     }>({
+          sucess: false,
+          message: null,
+          errors: null
+     })
+
+     async function handlerSignIn(event: FormEvent<HTMLFormElement>) {
+          event.preventDefault()
+
+          const form = event.currentTarget
+          const data = new FormData(form)
+
+          startTransition(async () => {
+               const state = await signInWithEmailAndPassword(data)
+               setFormState(state)
+          })
+     }
 
      return (
-          <form action={formAction} className="space-y-6 flex flex-col items-center" >
+          <form onSubmit={handlerSignIn} className="space-y-6 flex flex-col items-center" >
 
                {sucess === false && message && (
-                    <Alert variant="destructive">
+                    <Alert variant="destructive" className="absolute bottom-5 right-8 w-56">
                          <AlertOctagon className="size-4" />
                          <AlertTitle>Sign In Failed!</AlertTitle>
                          <AlertDescription>
@@ -50,7 +69,7 @@ export function SignInForm() {
                     <Input name='password' type="password" id="password" />
 
                     {errors?.password && (
-                         <p className="text-xs font-font-medium text-red-500 dark:text-red-400">{errors.password[0]}</p>
+                         <p className="text-xs font-mediun text-red-500 dark:text-red-400">{errors.password[0]}</p>
                     )}
 
                     <Link href="/auth/forgot-password" className="text-xs font-medium text-foreground hover:underline">
