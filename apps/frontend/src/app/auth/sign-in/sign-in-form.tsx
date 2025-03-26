@@ -15,9 +15,14 @@ import { AlertOctagon, Loader2 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useFormState } from "@/hook/useFormState";
 import { signInWithEmailAndPassword } from "./actions";
+import { useRouter } from "next/navigation";
 
 export function SignInForm() {
-     const [{ errors, success, message }, handleSubmit, isPeding] = useFormState(signInWithEmailAndPassword)
+     const router = useRouter()
+     const [{ errors, success, message }, handleSubmit, isPeding] = useFormState(
+          signInWithEmailAndPassword,
+          // () => { router.push("/dashboard") }
+     )
 
 
      return (
