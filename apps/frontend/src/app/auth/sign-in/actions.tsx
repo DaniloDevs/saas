@@ -16,7 +16,7 @@ export async function signInWithEmailAndPassword( data: FormData) {
      if (!result.success) {
           const errors = result.error.flatten().fieldErrors
 
-          return { sucess: false, message: null, errors }
+          return { success: false, message: null, errors }
      }
      const { email, password } = result.data
 
@@ -31,11 +31,11 @@ export async function signInWithEmailAndPassword( data: FormData) {
           if (err instanceof HTTPError) {
                const { message } = await err.response.json()
 
-               return { sucess: false, message, errors: null }
+               return { success: false, message, errors: null }
           }
           
-          return { sucess: false, message: "Unexpected error, try again a few minutes.", errors: null }
+          return { success: false, message: "Unexpected error, try again a few minutes.", errors: null }
      }
 
-     return { sucess: true, message: null, errors: null }
+     return { success: true, message: null, errors: null }
 }

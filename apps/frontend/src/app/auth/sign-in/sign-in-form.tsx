@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useTransition, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,40 +11,19 @@ import { Separator } from "@/components/ui/separator";
 import googleIcon from "@/assets/google-logo.svg";
 import gitHubIcon from "@/assets/github-logo.svg";
 
-import { signInWithEmailAndPassword } from "./actions";
 import { AlertOctagon, Loader2 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useFormState } from "@/hook/useFormState";
+import { signInWithEmailAndPassword } from "./actions";
 
 export function SignInForm() {
+     const [{ errors, success, message }, handleSubmit, isPeding] = useFormState(signInWithEmailAndPassword)
 
-     const [isPeding, startTransition] = useTransition()
-
-     const [{ sucess, message, errors }, setFormState] = useState<{
-          sucess: Boolean,
-          message: string | null,
-          errors: Record<string, string[]> | null
-     }>({
-          sucess: false,
-          message: null,
-          errors: null
-     })
-
-     async function handlerSignIn(event: FormEvent<HTMLFormElement>) {
-          event.preventDefault()
-
-          const form = event.currentTarget
-          const data = new FormData(form)
-
-          startTransition(async () => {
-               const state = await signInWithEmailAndPassword(data)
-               setFormState(state)
-          })
-     }
 
      return (
-          <form onSubmit={handlerSignIn} className="space-y-6 flex flex-col items-center" >
+          <form onSubmit={handleSubmit} className="space-y-6 flex flex-col items-center" >
 
-               {sucess === false && message && (
+               {success === false && message && (
                     <Alert variant="destructive" className="absolute bottom-5 right-8 w-56">
                          <AlertOctagon className="size-4" />
                          <AlertTitle>Sign In Failed!</AlertTitle>
