@@ -4,6 +4,7 @@ import { z } from "zod"
 import { BadRequest } from '../_errors/bad-request'
 import { prisma } from '@/lib/prisma'
 import { env } from '@saas/env'
+import { Console } from 'console'
 
 export default async function AuthenticateWithGithub(app: FastifyInstance) {
      app
@@ -34,7 +35,6 @@ export default async function AuthenticateWithGithub(app: FastifyInstance) {
                     githubOAuth.searchParams.set('redirect_uri', env.GITHUB_OAUTH_CLIENT_REDIRECT_URI)
                     githubOAuth.searchParams.set('code', code)
 
-
                     const githubAccessTokenResponse = await fetch(githubOAuth, {
                          method: 'POST',
                          headers: {
@@ -57,7 +57,7 @@ export default async function AuthenticateWithGithub(app: FastifyInstance) {
                     })
 
                     const githubUserData = githubUserResponse.json()
-
+                    console.log(githubUserData)
                     const { id: githubId, name, email, avatar_url } = z.object({
                          id: z.number().int().transform(String),
                          avatar_url: z.string().url(),
