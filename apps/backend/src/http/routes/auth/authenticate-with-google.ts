@@ -16,20 +16,38 @@ export default async function AuthenticateWithGoogle(app: FastifyInstance) {
                          body: z.object({
                               code: z.string()
                          }),
-                         // response: {
-                         //      201: z.object({
-                         //           token: z.string()
-                         //      }),
-                         // }
                     }
                },
                async (request, reply) => {
                     const { code } = request.body
 
+
+                    const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
+                         method: "POST",
+                         headers: { "Content-Type": "application/json" },
+                         body: JSON.stringify({
+                              client_id: "827421874260-ic2u8pnhf8p4nphih8adquf1261f60c9.apps.googleusercontent.com",
+                              client_secret: "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",
+                              code,
+                              grant_type: "authorization_code",
+                              redirect_uri: 'http://localhost:3000/api/auth/callback/google',
+                         }),
+                    })
+
+                    console.log(tokenResponse)
+                    
+                    if (!tokenResponse.ok) {
+                         throw new BadRequest("Failed to exchange code for access token")
+                    }
+                    
+                    const tokenData = await tokenResponse.json() 
+                    console.log(tokenData)
+                    const accessToken = tokenData.access_token
+
                     const googleUserResponse = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
                          method: "GET",
                          headers: {
-                              "Authorization": `Bearer ${code}`,
+                              "Authorization": `Bearer ${accessToken}`,
                               "Content-Type": "application/json"
                          }
                     })
