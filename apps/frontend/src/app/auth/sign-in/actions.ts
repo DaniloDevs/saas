@@ -47,5 +47,5 @@ export async function signInWithEmailAndPassword(data: FormData) {
           return { success: false, message: "Unexpected error, try again a few minutes.", errors: null }
      }
 
-    redirect('/dashboard')
+    redirect('/')
 }

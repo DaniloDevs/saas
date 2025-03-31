@@ -7,7 +7,7 @@ export default async function AuthLayout({
      children: React.ReactNode;
 }>) {
      if(await isAuthenticated()) {
-          redirect('/dashboard')
+          redirect('/auth/sign-in')
      }
 
      return (
