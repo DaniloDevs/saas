@@ -1,7 +1,6 @@
 'use client'
 
 import Link from "next/link";
-import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,13 +11,11 @@ import { AlertOctagon, Loader2 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useFormState } from "@/hook/useFormState";
 import { signInWithEmailAndPassword } from "./actions";
-import { useRouter } from "next/navigation";
 import { ButtonSignInWithGithub } from "@/components/sign-in/sign-in-with-github"
 
 export function SignInForm() {
      const [{ errors, success, message }, handleSubmit, isPeding] = useFormState(
           signInWithEmailAndPassword,
-          // () => { router.push("/dashboard") }
      )
 
 
