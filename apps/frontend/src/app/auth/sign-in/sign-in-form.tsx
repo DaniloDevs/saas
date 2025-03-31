@@ -13,11 +13,9 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useFormState } from "@/hook/useFormState";
 import { signInWithEmailAndPassword } from "./actions";
 import { useRouter } from "next/navigation";
-import { ButtonSignInWithGithub } from "@/components/sign-in/sign-in-with-github";
-import { ButtonSignInWithGoogle } from "../../../components/sign-in/sign-in-with-google";
+import { ButtonSignInWithGithub } from "@/components/sign-in/sign-in-with-github"
 
 export function SignInForm() {
-     const router = useRouter()
      const [{ errors, success, message }, handleSubmit, isPeding] = useFormState(
           signInWithEmailAndPassword,
           // () => { router.push("/dashboard") }
@@ -74,9 +72,9 @@ export function SignInForm() {
 
                <Separator />
 
-               <div className="grid grid-cols-2 gap-2 ">
+               <div className="grid grid-cols-1 gap-2 ">
                    
-                    <ButtonSignInWithGoogle />
+                    {/* <ButtonSignInWithGoogle /> */}
                    
                     <ButtonSignInWithGithub />
 
