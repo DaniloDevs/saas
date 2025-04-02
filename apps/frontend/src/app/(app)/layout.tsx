@@ -14,7 +14,7 @@ export default async function AppLayout({
      }
    
      return (
-          <SidebarProvider defaultOpen={false}>
+          <SidebarProvider>
                <AppSidebar variant="inset" />
                <SidebarInset className="rounded-2xl">
                     <SiteHeader />

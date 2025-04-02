@@ -5,25 +5,21 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuAction,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarSeparator,
+  SidebarGroupContent, SidebarHeader,
+  SidebarMenu, SidebarMenuButton,
+  SidebarMenuItem
 } from "@/components/ui/sidebar"
-import ProfileButton from "../header/profile-button"
+import ProfileButton from "./profile-button"
 import { items } from "./menu-items"
+import { OrganizationSwitcher } from "./OrganizationSwitcher"
 
 
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>)  {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
-      <SidebarHeader className="items-center">
-        <h1>Mysthic Sheet</h1>
+      <SidebarHeader >
+        <OrganizationSwitcher />
       </SidebarHeader>
 
       <SidebarContent>
