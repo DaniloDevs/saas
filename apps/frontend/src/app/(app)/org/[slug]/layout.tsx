@@ -9,9 +9,6 @@ export default async function AppLayout({
 }: Readonly<{
      children: React.ReactNode;
 }>) {
-     if (!await isAuthenticated()) {
-          redirect('/auth/sign-in')
-     }
    
      return (
           <SidebarProvider>
