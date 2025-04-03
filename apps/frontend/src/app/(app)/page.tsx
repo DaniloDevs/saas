@@ -1,11 +1,12 @@
-import Header from "@/components/header/header";
+import { OrganizationSwitcher } from "@/components/sidebar/OrganizationSwitcher";
+
 
 
 export default async function Home() {
      return (
           <div className="py-4">
                <main>
-                    main
+                    <OrganizationSwitcher />
                </main>
           </div>
      );
