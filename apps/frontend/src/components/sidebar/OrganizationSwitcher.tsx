@@ -15,9 +15,6 @@ export async function OrganizationSwitcher() {
      const { organizations } = await GetOrganizations()
      const currentOrganization = organizations.find(org => org.slug === currentOrg)
 
-     console.log(currentOrganization
-
-     )
      return (
           <DropdownMenu>
                <DropdownMenuTrigger className="flex items-center gap-2 rounded text-sm font-medium outline-none focus-visible:right-2 focus-visible:ring-primary">
