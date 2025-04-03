@@ -5,15 +5,34 @@ import { ChevronsUpDown, PlusCircle } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import Link from "next/link"
 import { GetOrganizations } from "@/http/get-organizations"
+import { cookies } from "next/headers"
 
 
 export async function OrganizationSwitcher() {
-     const { organizations } = await GetOrganizations()
+     const cookie = await cookies()
+     const currentOrg = cookie.get('org')?.value
 
+     const { organizations } = await GetOrganizations()
+     const currentOrganization = organizations.find(org => org.slug === currentOrg)
+
+     console.log(currentOrganization
+
+     )
      return (
           <DropdownMenu>
                <DropdownMenuTrigger className="flex items-center gap-2 rounded text-sm font-medium outline-none focus-visible:right-2 focus-visible:ring-primary">
-                    <span className="text-muted-foreground">Select Organization</span>
+                    {currentOrganization ? (
+                         <>
+                              <Avatar className="mr-2 size-5">
+                                   {currentOrganization.avatarUrl && <AvatarImage src={currentOrganization.avatarUrl} />}
+                                   <AvatarFallback />
+                              </Avatar>
+                              <span className="truncate text-left"> {currentOrganization.name} </span>
+                         </>
+                    ) : (
+                         <span className="text-muted-foreground">Select Organization</span>
+                    )}
+
                     <ChevronsUpDown className="ml-auto size-4" />
                </DropdownMenuTrigger>
                <DropdownMenuContent align="end" alignOffset={-16} sideOffset={12} className="w-[200px]" >
@@ -25,10 +44,10 @@ export async function OrganizationSwitcher() {
                                         <Link href={`/org/${org.slug}`}>
                                              <DropdownMenuItem>
                                                   <Avatar className="mr-2 size-5">
-                                                       <AvatarImage src="https://github.com/rocketseat.png" />
+                                                       {org.avatarUrl && <AvatarImage src={org.avatarUrl} />}
                                                        <AvatarFallback />
                                                   </Avatar>
-                                                  <span className="line-clamp-1"> Rocketseat </span>
+                                                  <span className="line-clamp-1"> {org.name} </span>
                                              </DropdownMenuItem>
                                         </Link>
                                    </DropdownMenuItem>
@@ -43,6 +62,6 @@ export async function OrganizationSwitcher() {
                          </Link>
                     </DropdownMenuItem>
                </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu >
      )
 }
