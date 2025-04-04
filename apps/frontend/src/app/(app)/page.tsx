@@ -43,7 +43,10 @@ export default async function Homepage() {
                     <Separator />     
 
                     <CardFooter>
-                         <CardTitle>
+                         <CardTitle className="flex items-center ">
+                              <Link href="" children>
+                              
+                              </Link>
                               <Swords className="mr-2 size-6"/>
                               <span> Search for your Characters </span>
                          </CardTitle>

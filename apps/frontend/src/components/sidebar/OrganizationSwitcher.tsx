@@ -5,7 +5,6 @@ import { ChevronsUpDown, PlusCircle } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import Link from "next/link"
 import { GetOrganizations } from "@/http/get-organizations"
-import { cookies } from "next/headers"
 import { getCurrentOrganization } from "@/auth/auth"
 
 
@@ -17,12 +16,12 @@ export async function OrganizationSwitcher() {
 
      return (
           <DropdownMenu>
-               <DropdownMenuTrigger className="flex items-center gap-2 rounded text-sm font-medium outline-none focus-visible:right-2 focus-visible:ring-primary">
+               <DropdownMenuTrigger className="flex items-center gap-2 rounded text-sm font-medium outline-none focus-visible:right-2 focus-visible:ring-primary" >
                     {currentOrganization ? (
                          <>
-                              <Avatar className="mr-2 size-5">
-                                   {currentOrganization.avatarUrl && <AvatarImage src={currentOrganization.avatarUrl} />}
-                                   <AvatarFallback />
+                              <Avatar className="size-8 mr-2 rounded-lg">
+                                   {currentOrganization.avatarUrl && <AvatarImage src={currentOrganization.avatarUrl}  className="rounded-lg"/>}
+                                   <AvatarFallback  className="rounded-lg"/>
                               </Avatar>
                               <span className="truncate text-left"> {currentOrganization.name} </span>
                          </>
