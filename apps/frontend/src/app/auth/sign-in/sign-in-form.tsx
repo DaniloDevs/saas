@@ -55,7 +55,7 @@ export function SignInForm() {
                          </Link>
                     </div>
 
-                    <Button type="submit" variant="outline" className="w-full" disabled={isPeding}>
+                    <Button type="submit"  className="w-full" disabled={isPeding}>
                          {isPeding ? <Loader2 className="size-4 animate-spin" /> : "Sign in With e-mail"}
                     </Button>
 

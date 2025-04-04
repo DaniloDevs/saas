@@ -27,7 +27,7 @@ export default async function Homepage() {
                          <div className=" w-fit flex flex-col gap-4">
                               {organizations.map((org => {
                                    return (
-                                        <Link href={`/org/${org.slug}`} key={org.id} className="w-full flex items-center p-2  shadow-2xl rounded-2xl">
+                                        <Link href={`/org/${org.slug}`} key={org.id} className="w-full flex items-center p-2 rounded-2xl">
                                              <Avatar className="mr-2 size-8 ">
                                                   {org.avatarUrl && <AvatarImage src={org.avatarUrl} />}
                                                   <AvatarFallback />
@@ -43,12 +43,11 @@ export default async function Homepage() {
                     <Separator />     
 
                     <CardFooter>
-                         <CardTitle className="flex items-center ">
-                              <Link href="" children>
-                              
+                         <CardTitle>
+                              <Link href="" className="flex items-center">
+                                   <Swords className="mr-2 size-6"/>
+                                   <span> Search for your Characters </span>
                               </Link>
-                              <Swords className="mr-2 size-6"/>
-                              <span> Search for your Characters </span>
                          </CardTitle>
                     </CardFooter>       
                </Card>

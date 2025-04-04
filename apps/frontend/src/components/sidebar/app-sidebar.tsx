@@ -7,11 +7,13 @@ import {
   SidebarGroup,
   SidebarGroupContent, SidebarHeader,
   SidebarMenu, SidebarMenuButton,
-  SidebarMenuItem
+  SidebarMenuItem,
+  SidebarSeparator
 } from "@/components/ui/sidebar"
 import ProfileButton from "./profile-button"
 import { items } from "./menu-items"
 import { OrganizationSwitcher } from "./OrganizationSwitcher"
+import { ThemeSwitcher } from "../themes/theme-switvher"
 
 
 
@@ -40,8 +42,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
+
+
+      <SidebarFooter className="flex flex-row items-center bg-background rounded-2xl">
         <ProfileButton />
+        <ThemeSwitcher />
       </SidebarFooter>
     </Sidebar>
   )
