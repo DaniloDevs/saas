@@ -6,11 +6,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import Link from "next/link"
 import { GetOrganizations } from "@/http/get-organizations"
 import { cookies } from "next/headers"
+import { getCurrentOrganization } from "@/auth/auth"
 
 
 export async function OrganizationSwitcher() {
-     const cookie = await cookies()
-     const currentOrg = cookie.get('org')?.value
+     const currentOrg = await getCurrentOrganization()
 
      const { organizations } = await GetOrganizations()
      const currentOrganization = organizations.find(org => org.slug === currentOrg)
