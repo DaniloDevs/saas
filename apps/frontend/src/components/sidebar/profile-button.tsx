@@ -29,7 +29,7 @@ export default async function ProfileButton() {
                               <span className="text-sm font-medium">{user.name}</span>
                          </div>
                     </div>
-                    <Sliders className="size-5" />
+                    <Sliders className="size-4" />
                </DropdownMenuTrigger>
 
                <DropdownMenuContent

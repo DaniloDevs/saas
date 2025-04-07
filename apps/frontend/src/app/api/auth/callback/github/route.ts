@@ -15,6 +15,7 @@ export async function GET(request: NextRequest) {
      }
 
      const { token } = await SignInWithGitHub({ code })
+  
 
      const cookieStore = await cookies()
      cookieStore.set('token', token, {
@@ -23,7 +24,7 @@ export async function GET(request: NextRequest) {
      })
 
      const redirectUrl = request.nextUrl.clone()
-     redirectUrl.pathname = '/dashboard'
+     redirectUrl.pathname = '/'
      redirectUrl.search = ''
 
      return NextResponse.redirect(redirectUrl)
