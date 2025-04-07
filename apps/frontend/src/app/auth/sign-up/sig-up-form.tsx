@@ -10,6 +10,7 @@ import { AlertOctagon, Loader2 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import Link from "next/link"
 import { signUpAction } from "./actions"
+import { ButtonSignInWithGoogle } from "@/components/sign-in/sign-in-with-google"
 
 export default function SignUpForm() {
      const [{ errors, success, message }, handleSubmit, isPeding] = useFormState(
@@ -80,6 +81,7 @@ export default function SignUpForm() {
 
                <div className="grid grid-cols-1 gap-2 ">
                     <ButtonSignInWithGithub />
+                    <ButtonSignInWithGoogle />
                </div>
           </div>
      )

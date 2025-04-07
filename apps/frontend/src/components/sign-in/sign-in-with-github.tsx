@@ -6,7 +6,7 @@ import { signInWithGithub } from "@/app/auth/action";
 export function ButtonSignInWithGithub() {
      return (
           <form action={signInWithGithub}>
-               <Button type="submit" variant="ghost" className="w-full border">
+               <Button type="submit" variant="secondary" className="w-full ">
                     <Image src={gitHubIcon} className="size-5 mr-2 shadow-2xl dark:invert" alt="GitHub Icon" />
                     GitHub Sign-in
                </Button>

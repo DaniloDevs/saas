@@ -12,6 +12,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useFormState } from "@/hook/useFormState";
 import { signInWithEmailAndPassword } from "./actions";
 import { ButtonSignInWithGithub } from "@/components/sign-in/sign-in-with-github"
+import { ButtonSignInWithGoogle } from "@/components/sign-in/sign-in-with-google";
 
 export function SignInForm() {
      const [{ errors, success, message }, handleSubmit, isPeding] = useFormState(
@@ -70,11 +71,8 @@ export function SignInForm() {
                <Separator />
 
                <div className="grid grid-cols-1 gap-2 ">
-                   
-                    {/* <ButtonSignInWithGoogle /> */}
-                   
+                    <ButtonSignInWithGoogle />
                     <ButtonSignInWithGithub />
-
                </div>
           </div>
      )
