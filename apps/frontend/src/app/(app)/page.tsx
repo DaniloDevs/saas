@@ -20,7 +20,7 @@ export default async function Homepage() {
           <div className="min-h-screen flex items-center justify-center">
                <Card className="w-1/5 border-none rounded-xl" >
                     <CardHeader className="text-center">
-                         <CardTitle> Escolha sua Organização </CardTitle>
+                         <CardTitle> Choose an Organization</CardTitle>
                     </CardHeader>
                     <CardContent className="w-full flex justify-center ">
                          <div className=" w-fit flex flex-col gap-4">
@@ -44,9 +44,9 @@ export default async function Homepage() {
                     <CardFooter className="flex justify-center">
                          <CardTitle>
 
-                              <Link href="/create-organization" className="flex items-center textlg">
+                              <Link href="/create-organization" className="flex items-center">
                                    <PlusCircle className="mr-2 size-5" />
-                                   Adicionar Organização
+                                   Create a new Organization
                               </Link>
 
                               {/* <Link href="" className="flex items-center">
