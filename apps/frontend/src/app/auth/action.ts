@@ -14,7 +14,7 @@ export function signInWithGithub() {
 export function signInWithGoogle() {
      const googleSignInURL = new URL('https://accounts.google.com/o/oauth2/v2/auth')
 
-     googleSignInURL.searchParams.set('scope', 'https://www.googleapis.com/auth/userinfo.email')
+     googleSignInURL.searchParams.set('scope', 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile')
      googleSignInURL.searchParams.set('response_type', 'code')
      googleSignInURL.searchParams.set('state', 'state_parameter_passthrough_value')
      googleSignInURL.searchParams.set('redirect_uri', 'http://localhost:3000/api/auth/callback/google')
