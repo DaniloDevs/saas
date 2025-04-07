@@ -22,7 +22,7 @@ export default async function AuthenticateWithGoogle(app: FastifyInstance) {
                     const { code } = request.body
 
 
-                    const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
+                    const googleAccessTokenDate = await fetch("https://oauth2.googleapis.com/token", {
                          method: "POST",
                          headers: { "Content-Type": "application/json" },
                          body: JSON.stringify({
@@ -34,37 +34,37 @@ export default async function AuthenticateWithGoogle(app: FastifyInstance) {
                          }),
                     })
 
-                    console.log(tokenResponse)
-                    
-                    if (!tokenResponse.ok) {
+
+                    if (!googleAccessTokenDate.ok) {
                          throw new BadRequest("Failed to exchange code for access token")
                     }
-                    
-                    const tokenData = await tokenResponse.json() 
-                    console.log(tokenData)
-                    const accessToken = tokenData.access_token
+
+                    const googleUserTokenResponse = await googleAccessTokenDate.json() as { access_token: string }
+
+                    const access_token = googleUserTokenResponse.access_token
 
                     const googleUserResponse = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
                          method: "GET",
                          headers: {
-                              "Authorization": `Bearer ${accessToken}`,
+                              "Authorization": `Bearer ${access_token}`,
                               "Content-Type": "application/json"
                          }
                     })
 
                     const googleUserData = await googleUserResponse.json()
 
-                    const { id: googleId, name, email, picture } = z.object({
+
+
+                    const { email, picture: avatarUrl, id: googleId, given_name: name } = z.object({
                          id: z.string(),
-                         picture: z.string().url(),
-                         name: z.string().nullable(),
                          email: z.string().nullable(),
+                         given_name: z.string().nullable(),
+                         picture: z.string().url(),
                     }).parse(googleUserData)
 
                     if (email === null) {
-                         throw new BadRequest("Your Github account must have an emailto authenticate")
+                         throw new BadRequest("Your  google account must have an emailto authenticate")
                     }
-
 
                     let user = await prisma.user.findUnique({
                          where: { email }
@@ -75,7 +75,7 @@ export default async function AuthenticateWithGoogle(app: FastifyInstance) {
                               data: {
                                    name,
                                    email,
-                                   avatarUrl: picture
+                                   avatarUrl
                               }
                          })
                     }
@@ -108,6 +108,7 @@ export default async function AuthenticateWithGoogle(app: FastifyInstance) {
                          }
                     )
 
+                    console.log(token)
                     return reply.status(201).send({ token })
                }
           )

@@ -5,6 +5,7 @@ import { NextResponse, type NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
      const { searchParams } = new URL(request.url)
+     
      const code = searchParams.get("code")
 
      if (!code) {
@@ -23,7 +24,7 @@ export async function GET(request: NextRequest) {
      })
 
      const redirectUrl = request.nextUrl.clone()
-     redirectUrl.pathname = '/dashboard'
+     redirectUrl.pathname = '/'
      redirectUrl.search = ''
 
      return NextResponse.redirect(redirectUrl)
