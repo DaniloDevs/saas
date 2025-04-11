@@ -10,9 +10,9 @@ import {
   SidebarMenuItem,
   SidebarSeparator
 } from "@/components/ui/sidebar"
-import ProfileButton from "./profile-button"
+import ProfileButton from "../header/profile-button"
 import { items } from "./menu-items"
-import { OrganizationSwitcher } from "./OrganizationSwitcher"
+import { OrganizationSwitcher } from "../header/OrganizationSwitcher"
 import { ThemeSwitcher } from "../themes/theme-switvher"
 
 

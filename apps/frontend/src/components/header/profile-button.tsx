@@ -1,8 +1,7 @@
 import { LogOut, Sliders, UserCircleIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import auth from "@/auth/auth"
-import { DropdownMenuGroup, DropdownMenuLabel } from "@radix-ui/react-dropdown-menu";
 
 function getInitials(name: string): string {
      const initials = name
@@ -19,24 +18,25 @@ export default async function ProfileButton() {
 
      return (
           <DropdownMenu>
-               <DropdownMenuTrigger className="flex justify-between items-center w-full" >
+               <DropdownMenuTrigger className="flex justify-center items-center w-36 p-1  " >
                     <div className=" flex items-center  gap-4 outline-0">
-                         <Avatar className="size-10 rounded-lg">
-                              {user.avatarUrl && <AvatarImage src={user.avatarUrl} />}
-                              {user.name && <AvatarFallback className="rounded-lg">{getInitials(user.name)}</AvatarFallback>}
-                         </Avatar>
                          <div className="flex flex-col items-start">
                               <span className="text-sm font-medium">{user.name}</span>
                          </div>
+
+                         <Avatar className="size-8">
+                              {user.avatarUrl && <AvatarImage src={user.avatarUrl} />}
+                              {user.name && <AvatarFallback className="">{getInitials(user.name)}</AvatarFallback>}
+                         </Avatar>
                     </div>
-                    <Sliders className="size-4" />
                </DropdownMenuTrigger>
 
                <DropdownMenuContent
                     className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-                    side={"right"}
-                    align="end"
-                    sideOffset={4}
+                    side={"bottom"}
+                    align="start"
+                    sideOffset={28}
+                    alignOffset={-110}
                >
                     <DropdownMenuLabel className="p-0 font-normal">
                          <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
