@@ -1,6 +1,5 @@
 
-import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from "../ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import { ChevronsUpDown, PlusCircle } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import Link from "next/link"
@@ -16,12 +15,12 @@ export async function OrganizationSwitcher() {
 
      return (
           <DropdownMenu>
-               <DropdownMenuTrigger className="flex items-center gap-2 rounded text-sm font-medium outline-none focus-visible:right-2 focus-visible:ring-primary" >
+               <DropdownMenuTrigger className="flex items-center gap-2 rounded-sm border text-sm hover:bg-muted h-11 w-58 px-4" >
                     {currentOrganization ? (
                          <>
-                              <Avatar className="size-8 mr-2 rounded-lg">
-                                   {currentOrganization.avatarUrl && <AvatarImage src={currentOrganization.avatarUrl}  className="rounded-lg"/>}
-                                   <AvatarFallback  className="rounded-lg"/>
+                              <Avatar className="size-5 mr-2 ">
+                                   {currentOrganization.avatarUrl && <AvatarImage src={currentOrganization.avatarUrl}  />}
+                                   <AvatarFallback  />
                               </Avatar>
                               <span className="truncate text-left"> {currentOrganization.name} </span>
                          </>
@@ -31,7 +30,8 @@ export async function OrganizationSwitcher() {
 
                     <ChevronsUpDown className="ml-auto size-4" />
                </DropdownMenuTrigger>
-               <DropdownMenuContent align="end" alignOffset={-16} sideOffset={12} className="w-[200px]" >
+
+               <DropdownMenuContent align="end" alignOffset={-54} sideOffset={8} className="w-[200px]" >
                     <DropdownMenuGroup>
                          <DropdownMenuLabel>Organizations</DropdownMenuLabel>
                          {organizations.map((org => {
