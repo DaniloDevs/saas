@@ -15,7 +15,7 @@ export function OrganizationForm() {
      )
 
      return (
-          <form onSubmit={handleSubmit} className="space-y-6 flex flex-col items-center" >
+          <form onSubmit={handleSubmit} className="space-y-6 flex flex-col items-center p-2" >
                {success === false && message && (
                     <Alert variant="destructive" className="absolute bottom-5 right-8 w-56">
                          <AlertOctagon className="size-4" />
@@ -25,6 +25,7 @@ export function OrganizationForm() {
                          </AlertDescription>
                     </Alert>
                )}
+
                {success === true && message && (
                     <Alert variant="success" className="absolute bottom-5 right-8 w-80">
                          <AlertOctagon className="size-4" />
@@ -36,7 +37,7 @@ export function OrganizationForm() {
                )}
 
                <div className="space-y-2 w-full">
-                    <Label htmlFor="name">Organziation name</Label>
+                    <Label htmlFor="name">Name</Label>
                     <Input name='name' id="name" />
 
                     {errors?.name && (
@@ -45,7 +46,16 @@ export function OrganizationForm() {
                </div>
 
                <div className="space-y-2 w-full">
-                    <Label htmlFor="domain">E-mail domain</Label>
+                    <Label htmlFor="avatar_url"> Avatar Url</Label>
+                    <Input name='avatar_url' type="text" id="avatar_url" inputMode="url" placeholder="https://exemple.com/avatar"/>
+
+                    {errors?.avatar_url && (
+                         <p className="text-xs font-medium text-red-500 dark:text-red-400">{errors.avatar_url[0]}</p>
+                    )}
+               </div>
+
+               <div className="space-y-2 w-full">
+                    <Label htmlFor="domain"> domain </Label>
                     <Input name='domain' type="text" id="domain" inputMode="url" placeholder="exemple.com" />
 
                     {errors?.domain && (

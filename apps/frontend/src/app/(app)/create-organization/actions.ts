@@ -4,28 +4,49 @@ import { CreateOrganization } from "@/http/create-organization"
 import { HTTPError } from "ky"
 import { z } from "zod"
 
-const organizationSchema = z.object({
-     name: z.string().min(4, { message: 'Please incldue at leasst 4 characters' }),
-     domain: z.string().nullable().refine(value => {
-          if (value) {
-               const domainRegex = /^[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/
+const organizationSchema = z
+     .object({
+          name: z
+               .string()
+               .url({ message: 'Please, incluide at least 4 characters.' }),
+          avatar_url: z
+               .string()
+               .min(4, { message: 'Please, include a valid url.' }),
+          domain: z
+               .string()
+               .nullable()
+               .refine(
+                    (value) => {
+                         if (value) {
+                              const domainRegex = /^[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/
 
-               return domainRegex.test(value)
-          }
+                              return domainRegex.test(value)
+                         }
 
-          return true
-     }, { message: "Please, enter a valid domain." }),
-     shouldAttachUsersByDomain: z.union([z.literal('on'), z.literal('off'), z.boolean()]).transform((value) => value === true || value === 'on').default(false)
-}).refine(data => {
-     if (data.shouldAttachUsersByDomain === true || true && !data.domain) {
-          return false
-     }
+                         return true
+                    },
+                    {
+                         message: 'Please, enter a valid domain.',
+                    },
+               ),
+          shouldAttachUsersByDomain: z
+               .union([z.literal('on'), z.literal('off'), z.boolean()])
+               .transform((value) => value === true || value === 'on')
+               .default(false),
+     })
+     .refine(
+          (data) => {
+               if (data.shouldAttachUsersByDomain === true && !data.domain) {
+                    return false
+               }
 
-     return true
-}, {
-     message: 'Domain is required when auto-join is enablad.',
-     path: ['domain']
-})
+               return true
+          },
+          {
+               message: 'Domain is required when auto-join is enabled.',
+               path: ['domain'],
+          },
+     )
 
 export async function createOrganizationAction(data: FormData) {
 
@@ -37,16 +58,18 @@ export async function createOrganizationAction(data: FormData) {
           return { success: false, message: null, errors }
      }
 
-     const { name, domain, shouldAttachUsersByDomain } = result.data
+     const { name, domain, shouldAttachUsersByDomain, avatar_url } = result.data
 
 
      try {
           await CreateOrganization({
                name,
                domain,
+               avatar_url,
                shouldAttachUsersByDomain
           })
 
+          
           return { success: true, message: "Successfully saved the organization", errors: null }
 
      } catch (err) {

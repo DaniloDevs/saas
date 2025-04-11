@@ -4,6 +4,7 @@ import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation"
 import { items } from "./menu-items"
+import { ProjectSwitcher } from "../project-switcher"
 
 
 export function SiteHeader() {
@@ -19,6 +20,11 @@ export function SiteHeader() {
                          className="mx-2 data-[orientation=vertical]:h-4"
                     />
                     <h1 className="text-base font-medium">{currentItem?.title}</h1>
+                    <Separator
+                         orientation="vertical"
+                         className="mx-2 data-[orientation=vertical]:h-4"
+                    />
+                    <ProjectSwitcher />
                </div>
           </header>
      )

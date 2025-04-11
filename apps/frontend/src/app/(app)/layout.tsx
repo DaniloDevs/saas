@@ -3,14 +3,21 @@ import { redirect } from "next/navigation";
 
 export default async function AppLayout({
 	children,
+	parallelRoutes
 }: Readonly<{
-	children: React.ReactNode;
+	children: React.ReactNode,
+	parallelRoutes: React.ReactNode
 }>) {
 
 	if (!(await isAuthenticated())) {
 		redirect("/auth/sign-in");
 	}
 
-    
-	return <> {children} </>;
+
+	return (
+		<>
+			{children}
+			{parallelRoutes}
+		</>
+	)
 }

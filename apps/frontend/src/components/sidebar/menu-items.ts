@@ -7,9 +7,4 @@ export const items = [
     url: "/",
     icon: Home,
   },
-  {
-    title: "Sheets",
-    url: "/sheets",
-    icon: Layers,
-  },
 ]
