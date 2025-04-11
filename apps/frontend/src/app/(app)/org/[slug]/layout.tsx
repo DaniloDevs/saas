@@ -1,6 +1,6 @@
 import Header from "@/components/header/header";
 
-export default async function AppLayout({
+export default function AppLayout({
      children,
 }: Readonly<{
      children: React.ReactNode;

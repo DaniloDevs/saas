@@ -1,7 +1,6 @@
-import { ThemeProvider } from 'next-themes'
 import type { Metadata } from "next";
 import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
+import { Providers } from './providers';
 
 
 export const metadata: Metadata = {
@@ -16,10 +15,9 @@ export default function RootLayout({
   return (
     <html lang="pt-br" suppressHydrationWarning >
       <body className={"antialiased"}>
-          <ThemeProvider attribute="class" defaultTheme='dark' disableTransitionOnChange>
-            {children}  
-          </ThemeProvider>
-        <Toaster />
+        <Providers>
+          {children}  
+        </Providers>
       </body>
     </html>
   );

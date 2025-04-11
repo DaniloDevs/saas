@@ -13,7 +13,7 @@ export default async function CreateProjects(app: FastifyInstance) {
           .withTypeProvider<ZodTypeProvider>()
           .register(auth)
           .post(
-               '/organization/:slug/projects',
+               '/organizations/:slug/projects',
                {
                     schema: {
                          tags: ["Project"],
