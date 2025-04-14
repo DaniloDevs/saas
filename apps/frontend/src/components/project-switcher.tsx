@@ -49,7 +49,7 @@ export  function ProjectSwitcher() {
                                                 {org.avatarUrl && <AvatarImage src={org.avatarUrl} />}
                                                 <AvatarFallback />
                                            </Avatar>
-                                           <span className="line-clamp-1"> {org.name} </span>
+                                                   <span className="line-clamp-1"> {org.name} </span>
                                       </DropdownMenuItem>
                                  </Link>
                             </DropdownMenuItem>
