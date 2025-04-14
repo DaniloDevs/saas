@@ -1,17 +1,15 @@
 import { ability } from "@/auth/auth";
-import { ProjectSwitcher } from "@/components/project-switcher";
+import { ProjectSwitcher } from "@/components/header/project-switcher";
 
 
-export default async function Home() {
-     const permissions = await ability()
+export default function Home() {
+
 
      return (
           <div className="py-4">
-               <header className="absolute right-10">
-                    {permissions?.can('get','Project') && <ProjectSwitcher/>}
-               </header>
+
                <main>
-                
+                    <h1></h1>
                </main>
           </div>
      );
