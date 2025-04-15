@@ -12,8 +12,7 @@ export default async function AppLayout({
 	if (!(await isAuthenticated())) {
 		redirect("/auth/sign-in");
 	}
-
-
+	
 	return (
 		<>
 			{children}

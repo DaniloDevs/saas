@@ -9,6 +9,7 @@ import { ProjectSwitcher } from "./project-switcher";
 
 export default async function Header() {
      const permissions = await ability()
+     
      return (
           <div className="flex p-4 justify-between border-b">
                <div className="flex gap-4 justify-center">

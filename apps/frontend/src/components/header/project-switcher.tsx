@@ -6,8 +6,7 @@ import Link from "next/link"
 import { useQuery } from "@tanstack/react-query"
 import { GetProjects } from "@/http/get-project"
 import { useParams } from "next/navigation"
-import { Avatar, AvatarImage } from "../ui/avatar"
-import { AvatarFallback } from "@radix-ui/react-avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { Skeleton } from "../ui/skeleton"
 
 
