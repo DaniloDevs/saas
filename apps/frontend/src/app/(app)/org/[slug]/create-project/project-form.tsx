@@ -9,15 +9,25 @@ import { createProjectAction } from "./action"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertOctagon, Loader2 } from "lucide-react"
 import { Textarea } from "@/components/ui/textarea"
+import { useParams } from "next/navigation"
+import { queryClient } from "@/lib/react-query"
 
 
 export function ProjectForm() {
+     const { slug: org } = useParams<{ slug: string }>()
+ 
+
      const [{ errors, success, message }, handleSubmit, isPeding] = useFormState(
-          createProjectAction
+          createProjectAction,
+          () => {
+               queryClient.invalidateQueries({
+                 queryKey: [org, 'projects'],
+               })
+             },
      )
 
      return (
-          <form onSubmit={handleSubmit} className="space-y-6 flex flex-col items-center p-2" >
+          <form onSubmit={handleSubmit} className="space-y-6 flex flex-col items-center p-2 w-86" >
                {success === false && message && (
                     <Alert variant="destructive" className="absolute bottom-5 right-8 w-56">
                          <AlertOctagon className="size-4" />

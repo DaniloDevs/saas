@@ -108,7 +108,6 @@ export default async function AuthenticateWithGoogle(app: FastifyInstance) {
                          }
                     )
 
-                    console.log(token)
                     return reply.status(201).send({ token })
                }
           )

@@ -15,7 +15,7 @@ export function OrganizationForm() {
      )
 
      return (
-          <form onSubmit={handleSubmit} className="space-y-6 flex flex-col items-center p-2" >
+          <form onSubmit={handleSubmit} className="space-y-6 flex flex-col items-center p-2 "  >
                {success === false && message && (
                     <Alert variant="destructive" className="absolute bottom-5 right-8 w-56">
                          <AlertOctagon className="size-4" />

@@ -88,7 +88,6 @@ export default async function GetProjects(app: FastifyInstance) {
                          },
                     })
 
-                    console.log(projects)
 
                     return reply.status(200).send({ projects })
                }

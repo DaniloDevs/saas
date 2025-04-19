@@ -8,18 +8,12 @@ export default function CreateOrganization() {
 
      return (
           <>
-               <Header/>
-               
+               <Header />
+
                <div className="h-[80vh] flex flex-col items-center justify-center">
-                    <Card>
-                         <CardHeader className="flex justify-center">
-                              <CardTitle>Create Organizatin</CardTitle>
-                         </CardHeader>
-                         <CardContent>
-                              <OrganizationForm />
-                         </CardContent>
-                    </Card>
-               </div>
+                    <h1 className="text-lg">Create Organizatin</h1>
+                    <OrganizationForm />
+               </div >
           </>
      )
 }
