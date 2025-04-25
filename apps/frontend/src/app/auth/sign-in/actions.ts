@@ -1,6 +1,6 @@
 'use server'
 
-import { SignInWithPassWord } from "@/http/authenticate-with-password"
+import { SignInWithPassWord } from "@/https/authenticate-with-password"
 import { HTTPError } from "ky"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"

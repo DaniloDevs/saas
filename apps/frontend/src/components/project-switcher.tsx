@@ -4,7 +4,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { ChevronsUpDown, PlusCircle } from "lucide-react"
 import Link from "next/link"
 import { useQuery } from "@tanstack/react-query"
-import { GetProjects } from "@/http/get-project"
+import { GetProjects } from "@/https/get-project"
 import { useParams } from "next/navigation"
 
 

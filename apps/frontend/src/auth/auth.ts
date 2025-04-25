@@ -1,5 +1,5 @@
-import { GetMembership } from "@/http/get-membership";
-import { GetProfile } from "@/http/get-profile";
+import { GetMembership } from "@/https/get-membership";
+import { GetProfile } from "@/https/get-profile";
 import { defineAbilityFor } from "@saas/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

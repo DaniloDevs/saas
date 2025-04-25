@@ -3,7 +3,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { ChevronsUpDown, PlusCircle } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import Link from "next/link"
-import { GetOrganizations } from "@/http/get-organizations"
+import { GetOrganizations } from "@/https/get-organizations"
 import { getCurrentOrganization } from "@/auth/auth"
 
 

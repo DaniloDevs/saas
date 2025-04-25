@@ -1,6 +1,6 @@
 "use server"
 
-import { CreateOrganization } from "@/http/create-organization"
+import { CreateOrganization } from "@/https/create-organization"
 import { HTTPError } from "ky"
 import { z } from "zod"
 

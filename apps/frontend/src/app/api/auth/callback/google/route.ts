@@ -1,5 +1,5 @@
-import { SignInWithGitHub } from "@/http/sign-in-with-github";
-import { SignInWithGoogle } from "@/http/sign-in-with-google";
+import { SignInWithGitHub } from "@/https/sign-in-with-github";
+import { SignInWithGoogle } from "@/https/sign-in-with-google";
 import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
 

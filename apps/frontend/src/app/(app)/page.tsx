@@ -8,7 +8,7 @@ import {
      CardTitle,
 } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator";
-import { GetOrganizations } from "@/http/get-organizations";
+import { GetOrganizations } from "@/https/get-organizations";
 import { PlusCircle, Swords } from "lucide-react";
 import Link from "next/link";
 
