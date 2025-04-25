@@ -1,7 +1,7 @@
 "use server"
 
 import { getCurrentOrganization } from "@/auth/auth"
-import { CreateProject } from "@/http/create-project"
+import { CreateProject } from "@/https/create-project"
 import { HTTPError } from "ky"
 import { z } from "zod"
 
@@ -29,6 +29,7 @@ export async function createProjectAction(data: FormData) {
           const org = await getCurrentOrganization()
 
           await CreateProject({
+               // biome-ignore lint/style/noNonNullAssertion: <explanation>
                org: org!,
                name,
                description,
