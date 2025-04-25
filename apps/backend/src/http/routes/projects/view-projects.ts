@@ -49,8 +49,8 @@ export default async function GetProjects(app: FastifyInstance) {
                     const userId = await request.getCurrentUserId()
                     const { membership } = await request.getUserMembership(slug)
 
-                    const organazition = await prisma.organization.findUnique({ where: { id: membership.organizationId } })
-                    if (!organazition) {
+                    const organization = await prisma.organization.findUnique({ where: { id: membership.organizationId } })
+                    if (!organization) {
                          throw new BadRequest("Organization not found!");
                     }
 
@@ -60,11 +60,8 @@ export default async function GetProjects(app: FastifyInstance) {
                          throw new UnauthorizationError("You're not allowed to see organization projects");
                     }
 
+
                     const projects = await prisma.project.findMany({
-                         where: {
-                              slug,
-                              organizationId: organazition.id
-                         },
                          select: {
                               id: true,
                               name: true,
@@ -78,14 +75,19 @@ export default async function GetProjects(app: FastifyInstance) {
                                    select: {
                                         id: true,
                                         name: true,
-                                        avatarUrl: true
-                                   }
-                              }
+                                        email: true,
+                                        avatarUrl: true,
+                                   },
+                              },
+                         },
+                         where: {
+                              organizationId: organization.id,
                          },
                          orderBy: {
-                              createdAt: 'desc'
-                         }
+                              createdAt: 'desc',
+                         },
                     })
+
 
                     return reply.status(200).send({ projects })
                }
