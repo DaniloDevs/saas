@@ -5,9 +5,9 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useFormState } from "@/hook/useFormState"
-import { createOrganizationAction } from "./actions"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertOctagon, Loader2 } from "lucide-react"
+import { createOrganizationAction } from "../create-organization/actions"
 
 export function OrganizationForm() {
      const [{ errors, success, message }, handleSubmit, isPeding] = useFormState(

@@ -1,7 +1,6 @@
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { OrganizationForm } from "./organization-form"
 import Header from "@/components/header/header"
+import { OrganizationForm } from "../org/organization-form"
 
 
 export default function CreateOrganization() {

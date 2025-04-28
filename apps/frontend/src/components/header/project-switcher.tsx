@@ -4,10 +4,10 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { ChevronsUpDown, PlusCircle } from "lucide-react"
 import Link from "next/link"
 import { useQuery } from "@tanstack/react-query"
-import { GetProjects } from "@/http/get-project"
 import { useParams } from "next/navigation"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { Skeleton } from "../ui/skeleton"
+import { GetProjects } from "@/https/get-project"
 
 
 export function ProjectSwitcher() {

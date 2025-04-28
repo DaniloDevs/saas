@@ -6,9 +6,7 @@ import { z } from "zod"
 
 const organizationSchema = z
      .object({
-          name: z
-               .string()
-               .url({ message: 'Please, incluide at least 4 characters.' }),
+          name: z .string(),
           avatar_url: z
                .string()
                .min(4, { message: 'Please, include a valid url.' }),
