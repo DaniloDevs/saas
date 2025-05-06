@@ -29,7 +29,7 @@ export default async function GetOrganizationBilling(app: FastifyInstance) {
                                              unit: z.number(),
                                              price: z.number(),
                                         }),
-                                        project: z.object({
+                                        projects: z.object({
                                              amount: z.number(),
                                              unit: z.number(),
                                              price: z.number(),
@@ -76,7 +76,7 @@ export default async function GetOrganizationBilling(app: FastifyInstance) {
                                    unit: 10,
                                    price: amountOfMember * 10
                               },
-                              project: {
+                              projects: {
                                    amount: amountOfProjects,
                                    unit: 20,
                                    price: amountOfProjects * 20

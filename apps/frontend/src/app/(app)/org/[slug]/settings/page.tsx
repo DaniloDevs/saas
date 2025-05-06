@@ -9,19 +9,21 @@ import {
 import { OrganizationForm } from '../../organization-form'
 import { ShutdownOrganizationButton } from './shut-down-org'
 import { GetOrganization } from '@/https/get-organization'
+import { Billing } from './billing'
 
 
 export default async function Settings() {
   const permissions = await ability()
   const currentOrg = await getCurrentOrganization()
+  
   const canUpdateOrganization = permissions?.can('update', 'Organization')
-  // const canGetBilling = permissions?.can('get', 'Billing')
+  const canGetBilling = permissions?.can('get', 'Billing')
   const canShutdownOrganization = permissions?.can('delete', 'Organization')
 
   const { organization } = await GetOrganization(currentOrg!)
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-9">
       <h1 className="text-2xl font-bold">Settings</h1>
 
       <div className="space-y-4">
@@ -39,7 +41,7 @@ export default async function Settings() {
                 initialData={{
                   name: organization.name,
                   avatarUrl: organization.avatarUrl!,
-                  domain: organization.domain,
+                  domain: organization.domain, 
                   shouldAttachUsersByDomain: organization.shouldAttachUsersByDomain
                 }}
               />
@@ -47,7 +49,7 @@ export default async function Settings() {
           </Card>
         )}
 
-        {/* {canGetBilling && <div>billing</div>} */}
+        {canGetBilling && <Billing />}
 
         {canShutdownOrganization && (
           <Card>
