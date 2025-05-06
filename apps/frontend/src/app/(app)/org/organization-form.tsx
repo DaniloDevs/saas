@@ -7,15 +7,22 @@ import { Label } from "@/components/ui/label"
 import { useFormState } from "@/hook/useFormState"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertOctagon, Loader2 } from "lucide-react"
-import { createOrganizationAction } from "../create-organization/actions"
+import { createOrganizationAction, updateOrganizationAction, type OrganizationSchema } from "./actions"
 
-export function OrganizationForm() {
+interface OrganizationFormProps {
+     isUpdate?: boolean
+     initialData?: OrganizationSchema
+}
+
+export function OrganizationForm({ isUpdate, initialData }: OrganizationFormProps) {
+     const formAction = isUpdate ? updateOrganizationAction : createOrganizationAction
+
      const [{ errors, success, message }, handleSubmit, isPeding] = useFormState(
-          createOrganizationAction
+          formAction
      )
 
      return (
-          <form onSubmit={handleSubmit} className="space-y-6 flex flex-col items-center p-2 "  >
+          <form onSubmit={handleSubmit} className="space-y-6 flex flex-col items-start p-2 "  >
                {success === false && message && (
                     <Alert variant="destructive" className="absolute bottom-5 right-8 w-56">
                          <AlertOctagon className="size-4" />
@@ -38,7 +45,7 @@ export function OrganizationForm() {
 
                <div className="space-y-2 w-full">
                     <Label htmlFor="name">Name</Label>
-                    <Input name='name' id="name" />
+                    <Input name='name' id="name" defaultValue={initialData?.name} />
 
                     {errors?.name && (
                          <p className="text-xs font-medium text-red-500 dark:text-red-400">{errors.name[0]}</p>
@@ -47,7 +54,7 @@ export function OrganizationForm() {
 
                <div className="space-y-2 w-full">
                     <Label htmlFor="avatar_url"> Avatar Url</Label>
-                    <Input name='avatar_url' type="text" id="avatar_url" inputMode="url" placeholder="https://exemple.com/avatar"/>
+                    <Input name='avatar_url' type="text" id="avatar_url" inputMode="url" placeholder="https://exemple.com/avatar" defaultValue={initialData?.avatar_url}/>
 
                     {errors?.avatar_url && (
                          <p className="text-xs font-medium text-red-500 dark:text-red-400">{errors.avatar_url[0]}</p>
@@ -56,7 +63,7 @@ export function OrganizationForm() {
 
                <div className="space-y-2 w-full">
                     <Label htmlFor="domain"> domain </Label>
-                    <Input name='domain' type="text" id="domain" inputMode="url" placeholder="exemple.com" />
+                    <Input name='domain' type="text" id="domain" inputMode="url" placeholder="exemple.com" defaultValue={initialData?.domain ?? undefined}/>
 
                     {errors?.domain && (
                          <p className="text-xs font-medium text-red-500 dark:text-red-400">{errors.domain[0]}</p>
@@ -69,6 +76,7 @@ export function OrganizationForm() {
                               <Checkbox
                                    name="shouldAttachUsersByDomain"
                                    id="shouldAttachUsersByDomain"
+                                   defaultChecked={initialData?.shouldAttachUsersByDomain } 
                               />
                          </div>
                          <label htmlFor="shouldAttachUsersByDomain" className="space-y-1">

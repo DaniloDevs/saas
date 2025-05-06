@@ -1,15 +1,18 @@
 "use server"
 
+import { getCurrentOrganization } from "@/auth/auth"
 import { CreateOrganization } from "@/https/create-organization"
+import { UpdateOrganization } from "@/https/update-organization"
 import { HTTPError } from "ky"
+import { revalidateTag } from "next/cache"
 import { z } from "zod"
 
 const organizationSchema = z
      .object({
-          name: z .string(),
-          avatar_url: z
+          name: z
                .string()
-               .min(4, { message: 'Please, include a valid url.' }),
+               .min(4, { message: 'Please, incluide at least 4 characters.' }),
+          avatarUrl: z.string(),
           domain: z
                .string()
                .nullable()
@@ -45,6 +48,7 @@ const organizationSchema = z
                path: ['domain'],
           },
      )
+export type OrganizationSchema = z.infer<typeof organizationSchema>
 
 export async function createOrganizationAction(data: FormData) {
 
@@ -56,18 +60,59 @@ export async function createOrganizationAction(data: FormData) {
           return { success: false, message: null, errors }
      }
 
-     const { name, domain, shouldAttachUsersByDomain, avatar_url } = result.data
+     const { name, domain, shouldAttachUsersByDomain, avatarUrl } = result.data
 
 
      try {
           await CreateOrganization({
                name,
                domain,
-               avatar_url,
+               avatarUrl,
                shouldAttachUsersByDomain
           })
 
-          
+          revalidateTag('organization')
+
+
+          return { success: true, message: "Successfully saved the organization", errors: null }
+
+     } catch (err) {
+          if (err instanceof HTTPError) {
+               const { message } = await err.response.json()
+
+               return { success: false, message, errors: null }
+          }
+
+          return { success: false, message: "Unexpected error, try again a few minutes.", errors: null }
+     }
+
+}
+
+export async function updateOrganizationAction(data: FormData) {
+     const currentOrg = await getCurrentOrganization() 
+     const result = organizationSchema.safeParse(Object.fromEntries(data))
+
+     if (!result.success) {
+          const errors = result.error.flatten().fieldErrors
+
+          return { success: false, message: null, errors }
+     }
+
+     const { name, domain, shouldAttachUsersByDomain, avatarUrl } = result.data
+
+
+     try {
+          await UpdateOrganization({
+               org: currentOrg!,
+               name,
+               domain,
+               avatarUrl,
+               shouldAttachUsersByDomain
+          })
+
+          revalidateTag('organization')
+
+
           return { success: true, message: "Successfully saved the organization", errors: null }
 
      } catch (err) {

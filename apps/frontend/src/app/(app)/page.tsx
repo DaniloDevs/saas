@@ -18,12 +18,12 @@ export default async function Homepage() {
 
      return (
           <div className="min-h-screen flex items-center justify-center">
-               <Card className="w-1/5 border-none rounded-xl" >
+               <Card className="w-2/7 border-none rounded-xl" >
                     <CardHeader className="text-center">
                          <CardTitle> Choose an Organization</CardTitle>
                     </CardHeader>
                     <CardContent className="w-full flex justify-center ">
-                         <div className=" w-fit flex flex-col gap-4">
+                         <div className=" w-full flex flex-col gap-4">
                               {organizations.map((org => {
                                    return (
                                         <Link href={`/org/${org.slug}`} key={org.id} className="w-full duration-150 hover:bg-accent hover:rounded-xl flex items-center py-2 px-5 rounded-2xl">

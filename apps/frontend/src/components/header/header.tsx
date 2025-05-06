@@ -21,7 +21,6 @@ export default async function Header() {
                </div>
                <div className="flex items-center ">
                     <ProfileButton />
-                    <Slash className="size-5 -rotate-45 text-border" />
                     <ThemeSwitcher />
                </div>
           </div>
