@@ -5,6 +5,7 @@
           "dev": "pnpm load:env tsx watch src/index.ts",
           "db:migrate": "pnpm load:env prisma migrate dev",
           "db:studio": "pnpm load:env prisma studio",
+          "seed": "pnpm load:env prisma db seed",
           "load:env": "dotenv -e ../../.env --"
      },
      "dependencies": {
