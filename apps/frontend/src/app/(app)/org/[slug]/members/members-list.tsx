@@ -6,16 +6,17 @@ import {
 	CardDescription,
 	CardHeader,
 	CardTitle,
-} from '@/components/ui/card'
+} from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { GetMembership } from "@/https/get-membership";
 import { GetOrganization } from "@/https/get-organization";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { ArrowLeftRight, Crown, User } from "lucide-react";
+import { ArrowLeftRight, Crown, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { organizationSchema } from "@saas/auth";
 import Image from "next/image";
 import { removeMemberAction } from "./actions";
+import { UpdateMemberRoleSelect } from "./update-member-select";
 
 export async function MembersList() {
 	const currentOrg = await getCurrentOrganization()
@@ -23,8 +24,11 @@ export async function MembersList() {
 
 
 	const [{ membership }, { members }, { organization }] = await Promise.all([
+		// biome-ignore lint/style/noNonNullAssertion: <explanation>
 		GetMembership(currentOrg!),
+		// biome-ignore lint/style/noNonNullAssertion: <explanation>
 		getMembers(currentOrg!),
+		// biome-ignore lint/style/noNonNullAssertion: <explanation>
 		GetOrganization(currentOrg!),
 	])
 
@@ -52,6 +56,7 @@ export async function MembersList() {
 													src={member.avatarUrl}
 													width={32}
 													height={32}
+													// biome-ignore lint/style/noNonNullAssertion: <explanation>
 													alt={member.name!}
 													className="aspect-square size-full"
 												/>
@@ -88,11 +93,21 @@ export async function MembersList() {
 												)
 											}
 
+
+											<UpdateMemberRoleSelect
+												memberId={member.id}
+												value={member.role}
+												disabled={
+													member.userId === membership.userId ||
+													member.userId === organization.ownerId ||
+													permissions?.cannot('update', 'User')
+												}
+											/>
+
 											{permissions?.can("delete", "User") && (
 												<form action={removeMemberAction.bind(null, member.id)}>
 													<Button disabled={member.userId === membership.userId || member.userId === organization.ownerId} type='submit' size="sm" variant="destructive">
-														<User className="mr-2 size-4" />
-														Remove
+														<Trash2 className=" size-4" />
 													</Button>
 												</form>
 											)}
