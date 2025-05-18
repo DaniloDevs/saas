@@ -13,7 +13,7 @@ export default async function RevokeInvite(app: FastifyInstance) {
           .withTypeProvider<ZodTypeProvider>()
           .register(auth)
           .post(
-               '/organization/:slug/invites/inviteId',
+               '/organitions/:slug/invites/inviteId',
                {
                     schema: {
                          tags: ["Invites"],

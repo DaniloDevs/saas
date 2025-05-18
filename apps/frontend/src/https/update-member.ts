@@ -13,7 +13,7 @@ export async function updateMember({
   memberId,
   role,
 }: UpdateMemberRequest) {
-  await api.put(`organization/${org}/members/${memberId}`, {
+  await api.put(`organitions/${org}/members/${memberId}`, {
     json: { role },
   })
 }

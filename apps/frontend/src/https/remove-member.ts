@@ -9,5 +9,5 @@ export async function removeMember({
    org,
    memberId
 }: removeMemberRequest) {
-   await api.delete(`organization/${org}/members/${memberId}`)
+   await api.delete(`organitions/${org}/members/${memberId}`)
 }
