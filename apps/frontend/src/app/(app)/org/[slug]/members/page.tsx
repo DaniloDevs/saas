@@ -1,6 +1,6 @@
 import { ability } from "@/auth/auth";
-import { Invites } from "./invites";
-import { MembersList } from "./members-list";
+import { Invites } from "../../../../../components/members/invites";
+import { MembersList } from "../../../../../components/members/members-list";
 
 export default async function Members() {
      const permissions = await ability()

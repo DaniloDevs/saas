@@ -13,7 +13,7 @@ export default async function GetInvites(app: FastifyInstance) {
           .withTypeProvider<ZodTypeProvider>()
           .register(auth)
           .get(
-               '/organization/:slug/invites',
+               '/organitions/:slug/invites',
                {
                     schema: {
                          tags: ["Invites"],
@@ -51,11 +51,11 @@ export default async function GetInvites(app: FastifyInstance) {
                     }
 
                     const { cannot } = getUserPermission(userId, membership.role)
-
+                    
                     if (cannot('get', 'Invite')) {
                          throw new UnauthorizationError("You're not allowed to get organization invites");
                     }
-
+                    
                     const invites = await prisma.invite.findMany({
                          where: {
                               organizationId: organazition.id
@@ -76,7 +76,8 @@ export default async function GetInvites(app: FastifyInstance) {
                     })
 
 
-                    return reply.status(204).send({ invites })
+
+                    return reply.status(200).send({ invites })
                }
           )
 }

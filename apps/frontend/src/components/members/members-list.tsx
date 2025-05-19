@@ -15,7 +15,7 @@ import { ArrowLeftRight, Crown, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { organizationSchema } from "@saas/auth";
 import Image from "next/image";
-import { removeMemberAction } from "./actions";
+import { removeMemberAction } from "../../app/(app)/org/[slug]/members/actions";
 import { UpdateMemberRoleSelect } from "./update-member-select";
 
 export async function MembersList() {

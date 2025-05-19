@@ -1,4 +1,3 @@
-
 'use client'
 
 import type { Role } from '@saas/auth'
@@ -12,7 +11,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-import { updateMemberAction } from './actions'
+import { updateMemberAction } from '../../app/(app)/org/[slug]/members/actions'
 
 interface UpdateMemberRoleSelectProps extends ComponentProps<typeof Select> {
   memberId: string

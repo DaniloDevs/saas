@@ -1,11 +1,11 @@
 import type { Role } from "@saas/auth"
-import { api } from "./api-client"
+import { api } from "../api-client"
 
 interface getInvitesResponse {
     invites: {
         id: string
         role: Role
-        createdAt: Date
+        createdAt: string | Date
         email: string
         author: {
             name: string | null
@@ -16,6 +16,7 @@ interface getInvitesResponse {
 
 export async function GetInvites(slug: string) {
     const result = await api.get(`organitions/${slug}/invites`).json<getInvitesResponse>()
+
 
     return result
 }
