@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useFormState } from "@/hook/useFormState"
+import { useFormState } from "@/hooks/useFormState"
 import { createProjectAction } from "./action"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertOctagon, Loader2 } from "lucide-react"
@@ -15,15 +15,15 @@ import { queryClient } from "@/lib/react-query"
 
 export function ProjectForm() {
      const { slug: org } = useParams<{ slug: string }>()
- 
+
 
      const [{ errors, success, message }, handleSubmit, isPeding] = useFormState(
           createProjectAction,
           () => {
                queryClient.invalidateQueries({
-                 queryKey: [org, 'projects'],
+                    queryKey: [org, 'projects'],
                })
-             },
+          },
      )
 
      return (
@@ -59,14 +59,14 @@ export function ProjectForm() {
 
                <div className="space-y-2 w-full">
                     <Label htmlFor="description"> Description </Label>
-                    <Textarea  name='description' id="description"/>
+                    <Textarea name='description' id="description" />
 
                     {errors?.description && (
                          <p className="text-xs font-medium text-red-500 dark:text-red-400">{errors.description[0]}</p>
                     )}
                </div>
 
-        
+
                <Button type="submit" variant="outline" className="w-full" >
                     {isPeding ? <Loader2 className="size-4 animate-spin" /> : "Save Project"}
                </Button>

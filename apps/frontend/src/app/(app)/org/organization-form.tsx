@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useFormState } from "@/hook/useFormState"
+import { useFormState } from "@/hooks/useFormState"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertOctagon, Loader2 } from "lucide-react"
 import { createOrganizationAction, updateOrganizationAction, type OrganizationSchema } from "./actions"
@@ -54,7 +54,7 @@ export function OrganizationForm({ isUpdate, initialData }: OrganizationFormProp
 
                <div className="space-y-2 w-full">
                     <Label htmlFor="avatar_url"> Avatar Url</Label>
-                    <Input name='avatar_url' type="text" id="avatar_url" inputMode="url" placeholder="https://exemple.com/avatar" defaultValue={initialData?.avatar_url}/>
+                    <Input name='avatar_url' type="text" id="avatar_url" inputMode="url" placeholder="https://exemple.com/avatar" defaultValue={initialData?.avatar_url} />
 
                     {errors?.avatar_url && (
                          <p className="text-xs font-medium text-red-500 dark:text-red-400">{errors.avatar_url[0]}</p>
@@ -63,7 +63,7 @@ export function OrganizationForm({ isUpdate, initialData }: OrganizationFormProp
 
                <div className="space-y-2 w-full">
                     <Label htmlFor="domain"> domain </Label>
-                    <Input name='domain' type="text" id="domain" inputMode="url" placeholder="exemple.com" defaultValue={initialData?.domain ?? undefined}/>
+                    <Input name='domain' type="text" id="domain" inputMode="url" placeholder="exemple.com" defaultValue={initialData?.domain ?? undefined} />
 
                     {errors?.domain && (
                          <p className="text-xs font-medium text-red-500 dark:text-red-400">{errors.domain[0]}</p>
@@ -76,7 +76,7 @@ export function OrganizationForm({ isUpdate, initialData }: OrganizationFormProp
                               <Checkbox
                                    name="shouldAttachUsersByDomain"
                                    id="shouldAttachUsersByDomain"
-                                   defaultChecked={initialData?.shouldAttachUsersByDomain } 
+                                   defaultChecked={initialData?.shouldAttachUsersByDomain}
                               />
                          </div>
                          <label htmlFor="shouldAttachUsersByDomain" className="space-y-1">

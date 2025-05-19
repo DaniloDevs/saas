@@ -13,12 +13,12 @@ export default async function RevokeInvite(app: FastifyInstance) {
           .withTypeProvider<ZodTypeProvider>()
           .register(auth)
           .delete(
-               '/organitions/:slug/invites/inviteId',
+               '/organizations/:slug/invites/:inviteId',
                {
                     schema: {
                          tags: ["Invites"],
                          summary: "Revoke an invite",
-                         security: [{ bearerAuth: [] }],
+                         security: [{ bearerAuth: [] }],  
                          params: z.object({
                               slug: z.string(),
                               inviteId: z.string(),
@@ -32,7 +32,6 @@ export default async function RevokeInvite(app: FastifyInstance) {
                     const { slug, inviteId } = request.params
                     const userId = await request.getCurrentUserId()
                     const { membership } = await request.getUserMembership(slug)
-
 
                     const organazition = await prisma.organization.findUnique({ where: { id: membership.organizationId } })
                     if (!organazition) {
@@ -60,7 +59,7 @@ export default async function RevokeInvite(app: FastifyInstance) {
                          where: { id: inviteId }
                     })
 
-                    return reply.status(204).send()
+                    return reply.status(200).send()
                }
           )
 }

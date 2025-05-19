@@ -5,6 +5,7 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Plus } from "lucide-react";
 import { GetInvites } from "@/https/invites/get-invites";
 import { RevokeInviteButton } from "./revoke-invite-button";
+import { CreateInviteForm } from "@/app/(app)/org/[slug]/members/create-invite-form";
 
 export async function Invites() {
      const permissions = await ability()
@@ -14,14 +15,9 @@ export async function Invites() {
           <Card>
                <CardHeader>
                     <CardTitle>Invites</CardTitle>
-                    <CardDescription className="flex justify-between items-center">
+                    <CardDescription className="flex flex-col gap-4">
                          List all invites memeber of this organization
-                         {permissions?.can('create', 'Invite') && (
-                              <Button>
-                                   <Plus className="size-4" />
-                                   Create Invite
-                              </Button>
-                         )}
+                         <CreateInviteForm />
                     </CardDescription>
                </CardHeader>
                <CardContent>

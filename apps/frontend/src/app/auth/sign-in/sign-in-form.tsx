@@ -9,7 +9,7 @@ import { Separator } from "@/components/ui/separator";
 
 import { AlertOctagon, Loader2 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { useFormState } from "@/hook/useFormState";
+import { useFormState } from "@/hooks/useFormState";
 import { signInWithEmailAndPassword } from "./actions";
 import { ButtonSignInWithGithub } from "@/components/sign-in/sign-in-with-github"
 import { ButtonSignInWithGoogle } from "@/components/sign-in/sign-in-with-google";
@@ -56,7 +56,7 @@ export function SignInForm() {
                          </Link>
                     </div>
 
-                    <Button type="submit"  className="w-full" disabled={isPeding}>
+                    <Button type="submit" className="w-full" disabled={isPeding}>
                          {isPeding ? <Loader2 className="size-4 animate-spin" /> : "Sign in With e-mail"}
                     </Button>
 
