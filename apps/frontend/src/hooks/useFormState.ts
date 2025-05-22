@@ -34,7 +34,7 @@ export function useFormState(
                setFormState(state)
           })
 
-          requestFormReset(form)
+          // requestFormReset(form)
      }
 
      return [formState, handleSubmit, isPending] as const

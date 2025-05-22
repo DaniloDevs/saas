@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { ProjectList } from './project-list'
 
 export default async function Projects() {
-     const currentOrg = getCurrentOrganization()
+     const currentOrg = await getCurrentOrganization()
      const permissions = await ability()
 
      return (
