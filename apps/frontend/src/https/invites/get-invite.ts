@@ -1,6 +1,6 @@
-import { Role } from '@saas/auth'
+import type { Role } from "@saas/auth"
 
-import { api } from '../api-client'
+import { api } from "../api-client"
 
 interface GetInviteResponse {
   invite: {
@@ -22,5 +22,7 @@ interface GetInviteResponse {
 export async function getInvite(inviteId: string) {
   const result = await api.get(`invites/${inviteId}`).json<GetInviteResponse>()
 
+  
   return result
 }
+   
