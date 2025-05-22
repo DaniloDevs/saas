@@ -1,32 +1,66 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { CheckCircle, LogIn } from "lucide-react";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { getInvite } from "@/https/invites/get-invite";
+import auth, { isAuthenticated } from "@/auth/auth";
+import { acceptInvite } from "@/https/accept-invites";
 
 dayjs.extend(relativeTime);
 
-export default async function InvitePage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const paramsId = await params
+interface InvitePageProps {
+  params: {
+    id: string;
+  };
+}
 
+export default async function InvitePage({ params }: InvitePageProps) {
+  const inviteId = params.id;
 
-  const { invite } = await getInvite(paramsId.id)
+  const { invite } = await getInvite(inviteId);
+  const isUserAuthenticated = await isAuthenticated();
+
+  let currentUserEmail = null;
+
+  if (isUserAuthenticated) {
+    const { user } = await auth();
+
+    currentUserEmail = user.email;
+  }
+
+  const userIsAuthenticatedWithSameEmailFromInvite =
+    currentUserEmail === invite.email;
+
+  async function signInFromInvite() {
+    "use server";
+    const cookie = await cookies();
+    cookie.set("inviteId", inviteId);
+
+    redirect(`/auth/sign-in?email=${invite.email}`);
+  }
+
+  async function acceptInviteAction() {
+    "use server";
+
+    await acceptInvite(inviteId);
+
+    redirect("/");
+  }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-4">
       <div className="flex w-full max-w-sm flex-col justify-center space-y-6">
         <div className="flex flex-col items-center space-y-4">
           <Avatar className="size-16">
-            {invite.author?.avatarUrl ? (
+            {invite.author?.avatarUrl && (
               <AvatarImage src={invite.author.avatarUrl} />
-            ) : (
-              <AvatarFallback />
             )}
+            <AvatarFallback />
           </Avatar>
 
           <p className="text-balance text-center leading-relaxed text-muted-foreground">
@@ -35,7 +69,7 @@ export default async function InvitePage({
             </span>{" "}
             invited you to join{" "}
             <span className="font-medium text-foreground">
-              {invite.organization.name }
+              {invite.organization.name}
             </span>
             .{" "}
             <span className="text-xs">{dayjs(invite.createdAt).fromNow()}</span>
@@ -43,6 +77,24 @@ export default async function InvitePage({
         </div>
 
         <Separator />
+
+        {!isUserAuthenticated && (
+          <form action={signInFromInvite}>
+            <Button type="submit" variant="secondary" className="w-full">
+              <LogIn className="mr-2 size-4" />
+              Sign in to accept the invite
+            </Button>
+          </form>
+        )}
+
+        {userIsAuthenticatedWithSameEmailFromInvite && (
+          <form action={acceptInviteAction}>
+            <Button type="submit" variant="secondary" className="w-full">
+              <CheckCircle className="mr-2 size-4" />
+              Join {invite.organization.name}
+            </Button>
+          </form>
+        )}
       </div>
     </div>
   );
