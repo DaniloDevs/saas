@@ -6,6 +6,7 @@ import { Separator } from "../ui/separator";
 import { ability } from "@/auth/auth";
 import { ProjectSwitcher } from "./project-switcher";
 import { Tabs } from "./tabs";
+import { PendingInvites } from "./peding-invites";
 
 
 export default async function Header() {
@@ -20,8 +21,9 @@ export default async function Header() {
                     <Tabs />
                </div>
                <div className="flex items-center ">
-                    <ProfileButton />
+                    <PendingInvites />
                     <ThemeSwitcher />
+                    <ProfileButton />
                </div>
           </div>
      )

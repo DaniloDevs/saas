@@ -20,14 +20,14 @@ export default async function ProfileButton() {
           <DropdownMenu>
                <DropdownMenuTrigger className="flex justify-center items-center w-36 hover:cursor-pointer p-1 rounded" >
                     <div className=" flex items-center  gap-4 outline-0">
-                         <div className="flex flex-col items-start">
-                              <span className="text-sm font-medium">{user.name}</span>
-                         </div>
-
                          <Avatar className="size-10 rounded-md">
                               {user.avatarUrl && <AvatarImage src={user.avatarUrl} />}
                               {user.name && <AvatarFallback className="">{getInitials(user.name)}</AvatarFallback>}
                          </Avatar>
+                         <div className="flex flex-col items-start">
+                              <span className="text-sm font-medium">{user.name}</span>
+                         </div>
+
                     </div>
                </DropdownMenuTrigger>
 
