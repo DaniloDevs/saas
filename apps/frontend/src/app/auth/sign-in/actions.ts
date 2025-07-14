@@ -1,7 +1,7 @@
 "use server";
 
-import { acceptInvite } from "@/https/accept-invites";
 import { SignInWithPassWord } from "@/https/authenticate-with-password";
+import { acceptInvite } from "@/https/invites/accept-invites";
 import { HTTPError } from "ky";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

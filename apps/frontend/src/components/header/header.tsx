@@ -6,7 +6,7 @@ import { Separator } from "../ui/separator";
 import { ability } from "@/auth/auth";
 import { ProjectSwitcher } from "./project-switcher";
 import { Tabs } from "./tabs";
-import { PendingInvites } from "./peding-invites";
+import { PendingInvites } from "./peding-invites/peding-invites";
 
 
 export default async function Header() {
